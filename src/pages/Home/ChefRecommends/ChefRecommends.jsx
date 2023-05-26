@@ -14,7 +14,7 @@ const ChefRecommends = () => {
     }, [])
 
     return (
-        <section>
+        <section className="my-20">
             <SectionTitle
                 subHeading={"Should try"}
                 heading={"Chef Recommends"}
