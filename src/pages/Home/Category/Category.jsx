@@ -7,10 +7,15 @@ import slider2 from "../../../assets/home/slide2.jpg"
 import slider3 from "../../../assets/home/slide3.jpg"
 import slider4 from "../../../assets/home/slide4.jpg"
 import slider5 from "../../../assets/home/slide5.jpg"
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 const Category = () => {
     return (
-        <div>
+        <section>
+            <SectionTitle
+                subHeading={"from 11:00am to 10:00pm"}
+                heading={"Order Online"}
+            ></SectionTitle>
             <Swiper
                 slidesPerView={4}
                 spaceBetween={30}
@@ -41,7 +46,7 @@ const Category = () => {
                     <img src={slider5} alt="" />
                 </SwiperSlide>
             </Swiper>
-        </div>
+        </section>
     );
 };
 
