@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -17,7 +18,7 @@ const Navbar = () => {
     </>
     return (
         <>
-            <div className="navbar max-w-screen-xl fixed z-10 bg-opacity-30 text-white bg-black">
+            <div className="navbar max-w-screen-xl fixed z-10 bg-opacity-30 text-white bg-black px-5">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -27,7 +28,10 @@ const Navbar = () => {
                             {navItems}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                    <div className="flex flex-col text-xl cursor-pointer">
+                        <Link to="/">BISTRO BOSS</Link>
+                        <small className="uppercase">Restaurant</small>
+                    </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
