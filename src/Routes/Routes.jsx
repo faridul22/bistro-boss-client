@@ -9,6 +9,8 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../Layouts/Dashboard";
 import MyCard from "../pages/Dashboard/MyCard/MyCard";
+import PrivateRoute from "./PrivateRoute";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 
 const router = createBrowserRouter([
     {
@@ -39,12 +41,16 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             {
                 path: 'mycard',
                 element: <MyCard></MyCard>
-            }
+            },
+            {
+                path: 'all_users',
+                element: <AllUsers></AllUsers>
+            },
         ]
     }
 

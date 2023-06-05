@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 
 
@@ -16,32 +17,45 @@ const SignUp = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = data => {
-        console.log(data)
+
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user)
 
-
                 updateUser(data.name, data.photoURL)
-                    .then(result => {
-                        const updatedResult = result.user;
-                        console.log(updatedResult)
+                    .then(() => {
 
+                        const savedUser = { name: data.name, email: data.email }
+                        fetch('http://localhost:5000/users', {
+                            method: "POST",
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(savedUser)
+                        })
+
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+
+                                    reset();
+
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'success',
+                                        title: 'User created successfully',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+
+                                    navigate(from, { replace: true });
+                                }
+                            })
 
                     })
                     .catch(error => console.log(error))
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'User created successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
 
-                reset();
-
-                navigate(from, { replace: true });
             })
             .catch(error => console.log(error))
     };
@@ -57,8 +71,8 @@ const SignUp = () => {
                         <h1 className="text-5xl font-bold">Sign Up now!</h1>
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
-                    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 card-body">
+                        <form onSubmit={handleSubmit(onSubmit)} className="">
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>
@@ -106,6 +120,7 @@ const SignUp = () => {
                                 <p className='text-center text-yellow-400 font-medium'><small>Already have an Account? <Link to="/login">Login now </Link></small></p>
                             </label>
                         </form>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>
