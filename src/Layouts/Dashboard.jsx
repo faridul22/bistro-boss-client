@@ -1,13 +1,18 @@
 import { FaBook, FaCalendarAlt, FaHome, FaShoppingCart, FaUsers, FaUtensils, FaWallet } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useCard from "../hooks/useCard";
+import useAdmin from "../hooks/useAdmin";
 
 
 const Dashboard = () => {
     const [cards] = useCard();
 
     // TODO: load data from the server to have dynamic based on Data
-    const isAdmin = true;
+
+    // const isAdmin = true;
+
+    const [isAdmin] = useAdmin()
+
     return (
         <div>
             <div className="drawer lg:drawer-open">
