@@ -3,12 +3,13 @@ import useAxiosSecure from './useAxiosSecure';
 import useAuth from './useAuth';
 
 const useCard = () => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
     // const token = localStorage.getItem('access-token');
     const [axiosSecure] = useAxiosSecure();
 
     const { isLoading, refetch, data: card = [] } = useQuery({
         queryKey: ['cards', user?.email],
+        enabled: !loading,
         // queryFn: async () => {
         //     const response = await fetch(`http://localhost:5000/cards?email=${user?.email}`, {
         //         headers: {
