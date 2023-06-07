@@ -30,9 +30,9 @@ const Dashboard = () => {
                         {
                             isAdmin ? <>
                                 <li><NavLink to="/dashboard/admin_home"><FaHome />Admin Home</NavLink></li>
-                                <li><NavLink to="/dashboard/add_items"><FaUtensils />Add Items</NavLink></li>
-                                <li><NavLink to="/dashboard/manage_items"><FaBook />Manage Items</NavLink></li>
-                                <li><NavLink to="/dashboard/all_users"><FaUsers />All Users</NavLink></li>
+                                <li><NavLink to="/dashboard/additem"><FaUtensils />Add an Item</NavLink></li>
+                                <li><NavLink to="/dashboard/manageitems"><FaBook />Manage Items</NavLink></li>
+                                <li><NavLink to="/dashboard/allusers"><FaUsers />All Users</NavLink></li>
 
 
                             </> : <>

@@ -9,8 +9,10 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../Layouts/Dashboard";
 import MyCard from "../pages/Dashboard/MyCard/MyCard";
-import AdminRoute from "./PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import AddItem from "../pages/Dashboard/AddItem/AddItem";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -41,16 +43,20 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <AdminRoute><Dashboard></Dashboard></AdminRoute>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             {
                 path: 'mycard',
                 element: <MyCard></MyCard>
             },
             {
-                path: 'all_users',
-                element: <AllUsers></AllUsers>
+                path: 'allusers',
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
+            {
+                path: 'additem',
+                element: <AdminRoute><AddItem></AddItem></AdminRoute>
+            }
         ]
     }
 
