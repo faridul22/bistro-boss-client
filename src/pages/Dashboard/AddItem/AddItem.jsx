@@ -4,8 +4,12 @@ import SectionTitle from './../../../components/SectionTitle/SectionTitle';
 import { useForm } from 'react-hook-form';
 
 const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
+import useAxiosSecure from './../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
+
 const AddItem = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [axiosSecure] = useAxiosSecure()
+    const { register, handleSubmit, reset } = useForm();
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
     const onSubmit = data => {
         const formData = new FormData();
@@ -19,13 +23,26 @@ const AddItem = () => {
                 if (imgResponse.success) {
                     const imgURL = imgResponse.data.display_url;
                     const { name, price, category, recipe } = data;
-                    const menuItem = { name, price: parseFloat(price), category, recipe, image: imgURL }
-                    console.log(menuItem)
+                    const newItem = { name, price: parseFloat(price), category, recipe, image: imgURL }
+                    console.log(newItem)
+                    axiosSecure.post('/menu', newItem)
+                        .then(data => {
+                            console.log('after posting new menu item', data.data)
+                            if (data.data.insertedId) {
+                                reset()
+                                Swal.fire({
+                                    position: 'canter',
+                                    icon: 'success',
+                                    title: 'New Item Added Successful',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                        })
                 }
             })
         // console.log(data)
     };
-    console.log(errors)
     // console.log(img_hosting_token)
     return (
         <div className='w-full px-10'>
