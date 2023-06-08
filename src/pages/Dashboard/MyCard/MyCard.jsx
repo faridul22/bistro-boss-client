@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import useCard from './../../../hooks/useCard';
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const MyCard = () => {
     const [cards, refetch] = useCard();
@@ -47,7 +48,9 @@ const MyCard = () => {
             <div className='uppercase flex justify-evenly my-5'>
                 <h3 className='text-2xl font-semibold'>Total Items: {cards.length}</h3>
                 <h3 className='text-2xl font-semibold'>Total price: ${total}</h3>
-                <button className='btn btn-warning btn-sm'>pay</button>
+                <Link to="/dashboard/payment">
+                    <button className='btn btn-warning btn-sm'>pay</button>
+                </Link>
             </div>
             <div className="overflow-x-auto">
                 <table className="table">
